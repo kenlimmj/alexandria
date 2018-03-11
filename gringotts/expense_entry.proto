@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+import "../data/calendar_frequency.proto";
+import "../data/transformable_string.proto";
+import "./budget_category.proto";
+import "./currency.proto";
+import "./depreciation.proto";
+import "./expense_value.proto";
+
+package alexandria.gringotts;
+
+// A generic expense entry.
+message ExpenseEntry {
+  // The name of the entry.
+  required alexandria.data.TransformableString name = 1;
+
+  // The provider of this entry, if any. Enforcing a consistent definition of
+  // "provider" is left to the application.
+  optional alexandria.data.TransformableString provider = 2;
+
+  // The expense value of this entry.
+  required alexandria.gringotts.ExpenseValue value = 3;
+
+  // The calendar frequency for this entry.
+  required alexendria.data.CalendarFrequency calendar_frequency = 4;
+
+  // Any expense value adjustments made to this entry, if any.
+  repeated alexandria.gringotts.ExpenseValue adjustments = 5;
+
+  // The depreciation information for this entry, if any.
+  optional alexandria.gringotts.Depreciation depreciation = 6;
+}

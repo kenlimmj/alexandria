@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+import "./currency.proto";
+import "google/protobuf/timestamp.proto";
+
+package alexandria.gringotts;
+
+// An expense value.
+message ExpenseValue {
+  // The UNIX timestamp on which the expense was *recorded*. The burden of
+  // whether this corresponds to the date incurred, processed, etc. is
+  // left to the application.
+  required google.protobuf.Timestamp date_recorded = 1;
+
+  // The currency in which the expense was recorded.
+  required alexandria.gringotts.Currency currency = 2;
+
+  // A relative "link" to another expense.
+  message Relative {
+    // The expense to be referenced.
+    required ExpenseValue reference = 1;
+
+    // The arithmetic relation to the referenced expense, for value computation.
+    oneof relation {
+      // The constant numerical value.
+      sint64 constant = 2;
+
+      // The percentage-based value.
+      float percentage = 3;
+    }
+  }
+
+  // The value of the expense.
+  oneof value {
+    // The fixed numerical value.
+    sint64 fixed = 3;
+
+    // The value relative to another expense.
+    Relative relative = 4;
+  }
+}

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package alexandria.data;
+
+// An inclusive date range. This differs from `google.protobuf.Duration` because
+// it stores the actual timestamps, rather than just the elapsed time.
+message ClosedDateRange {
+  // The starting UNIX timestamp.
+  required google.protobuf.Timestamp start = 0;
+
+  // The ending UNIX timestamp.
+  required google.protobuf.Timestamp end = 1;
+}

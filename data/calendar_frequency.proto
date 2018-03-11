@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package alexandria.data;
+
+// The set of human-readable calendar frequencies used for bucketing time.
+enum CalendarFrequency {
+  UNKNOWN = 0;
+  ONE_OFF = 1;
+  DAY = 2;
+  WEEK = 3;
+  BI_WEEK = 4;
+  MONTH = 5;
+  QUARTER = 6;
+  BI_ANNUAL = 7;
+  ANNUAL = 8;
+}

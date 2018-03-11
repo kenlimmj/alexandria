@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package alexandria.gringotts;
+
+// The set of currencies, in the format <currency name>_<country abbreviation>.
+enum Currency {
+  UNKNOWN = 0;
+  DOLLARS_US = 1;
+  DOLLARS_SG = 2;
+}

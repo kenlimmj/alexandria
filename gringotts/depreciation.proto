@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+import "../data/closed_numeric_range.proto";
+import "./expense_value.proto";
+
+package alexandria.gringotts;
+
+// A depreciation record.
+message Depreciation {
+  // The set of supported depreciation curves.
+  enum Curve {
+    UNKNOWN = 0;
+    STRAIGHT_LINE = 1;
+    DOUBLE_DECLINING = 2;
+    ANNUITY = 3;
+    SUM_OF_YEARS_DIGITS = 4;
+    UNITS_OF_PRODUCTION = 5;
+    UNITS_OF_TIME = 6;
+  }
+
+  // The depreciation curve.
+  required Curve curve = 1;
+
+  // The depreciation window for the asset. The depreciation curve will be
+  // applied over this window.
+  required alexandria.data.ClosedDateRange window = 2;
+
+  // The residual (salvage) value of the asset, if any.
+  optional alexandria.gringotts.ExpenseValue residual = 3;
+
+  // The impairment loss of the asset, if any. Note that this is *not* the final
+  // value of the asset less impairment; this value is applied *to* the asset.
+  optional alexendria.gringotts.ExpenseValue impairment_loss = 4;
+}

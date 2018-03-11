@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+import "../data/closed_numeric_range.proto";
+import "../data/transformable_string.proto";
+import "google/protobuf/timestamp.proto";
+
+package alexandria.data;
+
+// A patch is a unit of apply-able data with associated information.
+message Patch {
+  // The UUID for this patch.
+  required string id = 1;
+
+  // The UNIX timestamp at which the patch was created.
+  required google.protobuf.Timestamp date_created = 2;
+
+  // The data for the patch.
+  required alexandria.data.TransformableString data = 3;
+
+  // A target provides a global (e.g. UUID) and local resource locator (affected
+  // range) to which the patch can be applied.
+  message Target {
+    // The UUID of the target.
+    required string id = 1;
+
+    // The range within the target that is affected by this patch.
+    required alexandria.data.ClosedNumericRange affected_range = 2;
+  }
+
+  // The target of the patch, if any. If specified, the patch should be applied
+  // to the target as a downstream change. Otherwise the patch should create new
+  // data in the field which it populates.
+  optional Target target = 4;
+}

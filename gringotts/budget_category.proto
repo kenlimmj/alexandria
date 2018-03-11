@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package alexandria.gringotts;
+
+// The set of budget categories.
+enum BudgetCategory {
+  UNKNOWN = 0;
+  HEALTHCARE = 1;
+  PERSONAL_SPEND = 2;
+  RETIREMENT = 3;
+  SAVINGS = 4;
+  SHOCK = 5;
+  TRANSPORTATION = 6;
+  UTILITIES = 7;
+}

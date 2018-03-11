@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package alexandria.data;
+
+// A string which can be monadically transformed into another string. For
+// example, raw Markdown which can be transformed into HTML.
+message TransformableString {
+  // The raw string.
+  string raw = 1;
+
+  // The transformed string, if any.
+  optional string transformed = 2;
+}

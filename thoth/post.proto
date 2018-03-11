@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+import "../data/patch.proto";
+
+package alexandria.thoth;
+
+// A blog post.
+message Post {
+  // The title of the post.
+  required alexandria.data.Patch title = 1;
+
+  // The set of possible publication states for a post.
+  enum State {
+    UNKNOWN = 0;
+    DRAFT = 1;
+    SCHEDULED = 2;
+    PUBLISHED = 3;
+  }
+
+  // The current publication state of the post.
+  required State state = 2;
+
+  // The sections in the post.
+  repeated alexandria.data.Patch sections = 3;
+
+  // The changelog for the post.
+  repeated alexandria.thoth.Patch changelog = 4;
+}

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package alexandria.data;
+
+// An inclusive numeric range, i.e. [start, end]. Note that the field semantics
+// imply directionality (start -> end). Creation/update sites should *not* flip
+// start/end values in order to ensure that start < end. Instead, read sites
+// should handle that logic.
+message ClosedNumericRange {
+  // The starting number.
+  required sint64 start = 0;
+
+  // The ending number.
+  required sint64 end = 1;
+}
